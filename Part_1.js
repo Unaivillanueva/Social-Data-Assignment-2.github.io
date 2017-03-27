@@ -75,7 +75,7 @@ d3.json('data_vis_1.json', data_vis_1 => {
                     .transition().duration(500)
                     .style("font-weight", null)
                     .style("fill", "black")
-                    .style("font-size", "10px");
+                    .style("font-size", "12px");
                     text_label.transition()
                       .duration(1000)
                       .style("opacity", 0);
