@@ -14,8 +14,8 @@ d3.json('data_vis_1.json', data_vis_1 => {
 
 
     let svg = d3.select('#v1').append("svg")
-						.attr("width", w)
-						.attr("height", h);
+			.attr("width", w)
+			.attr("height", h);
     
     let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
     let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
