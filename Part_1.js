@@ -19,19 +19,19 @@ d3.json('data_vis_1.json', data_vis_1 => {
     
     let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
     let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
-    let xScale = d3.scale.linear()
+    let xScale = d3.scaleLinear()
                    .domain([0, Math.max(...new Set([...arr_x_1, ...arr_x_2]))])
                    .range([padding, w - padding]);
 
     let arr_y_1 = Object.values(data_2003).map(i => i['VEHICLE THEFT']);
     let arr_y_2 = Object.values(data_2015).map(i => i['VEHICLE THEFT']);
-    let yScale = d3.scale.linear()
+    let yScale = d3.scaleLinear()
                    .domain([0, Math.max(...new Set([...arr_y_1, ...arr_y_2]))])
                    .range([h - padding, padding]);
 
     let arr_r_1 = Object.values(data_2003).map(i => i['total']);
     let arr_r_2 = Object.values(data_2015).map(i => i['total']);
-    let rScale = d3.scale.linear()
+    let rScale = d3.scaleLinear()
                    .domain([0, Math.max(...new Set([...arr_r_1, ...arr_r_2]))])
                    .range([0, r_max]);
 
