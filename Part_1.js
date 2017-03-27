@@ -15,7 +15,7 @@ d3.json('data_vis_1.json', data_vis_1 => {
 	
     const text_label = d3.select("div#v1").append("div")
                           .attr("class", "tooltip")
-                          .style("opacity", 0).style();
+                          .style("opacity", 0);
 
     let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
     let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
@@ -134,21 +134,21 @@ d3.json('data_vis_1.json', data_vis_1 => {
 
     d3.select('#button2015').on('click', () => {
             if (current_data == 2003) {current_data = 2015; updateSvg(data_2015, true); 
-            d3.select('#button2003').style({'background-color': '#DCDCDC'});
-            d3.select('#button2015').style({'background-color': '#20B2AA'});}
+            d3.select('#button2003').style({'background-color', '#DCDCDC'});
+            d3.select('#button2015').style({'background-color', '#20B2AA'});}
         else if (current_data == 2015) {current_data = 2003; updateSvg(data_2003, true); 
-            d3.select('#button2015').style({'background-color': '#DCDCDC'});
-            d3.select('#button2003').style({'background-color': '#20B2AA'});}
+            d3.select('#button2015').style({'background-color', '#DCDCDC'});
+            d3.select('#button2003').style({'background-color', '#20B2AA'});}
           });
 
     d3.select('#button2003').on('click', () => {
 
             if (current_data == 2003) {current_data = 2015; updateSvg(data_2015, true); 
-            d3.select('#button2003').style({'background-color': '#DCDCDC'});
-            d3.select('#button2015').style({'background-color': '#20B2AA'});}
+            d3.select('#button2003').style({'background-color', '#DCDCDC'});
+            d3.select('#button2015').style({'background-color', '#20B2AA'});}
         else if (current_data == 2015) {current_data = 2003; updateSvg(data_2003, true); 
-            d3.select('#button2015').style({'background-color': '#DCDCDC'});
-            d3.select('#button2003').style({'background-color': '#20B2AA'});}
+            d3.select('#button2015').style({'background-color', '#DCDCDC'});
+            d3.select('#button2003').style({'background-color', '#20B2AA'});}
 
         console.log(current_data);
     });
