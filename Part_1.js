@@ -134,21 +134,21 @@ d3.json('data_vis_1.json', data_vis_1 => {
 
     d3.select('#button2015').on('click', () => {
             if (current_data == 2003) {current_data = 2015; updateSvg(data_2015, true); 
-            d3.select('#button2003').style({'background-color', '#DCDCDC'});
-            d3.select('#button2015').style({'background-color', '#20B2AA'});}
+            d3.select('#button2003').style('background-color', '#DCDCDC');
+            d3.select('#button2015').style('background-color', '#20B2AA');}
         else if (current_data == 2015) {current_data = 2003; updateSvg(data_2003, true); 
-            d3.select('#button2015').style({'background-color', '#DCDCDC'});
-            d3.select('#button2003').style({'background-color', '#20B2AA'});}
+            d3.select('#button2015').style('background-color', '#DCDCDC');
+            d3.select('#button2003').style('background-color', '#20B2AA');}
           });
 
     d3.select('#button2003').on('click', () => {
 
             if (current_data == 2003) {current_data = 2015; updateSvg(data_2015, true); 
-            d3.select('#button2003').style({'background-color', '#DCDCDC'});
-            d3.select('#button2015').style({'background-color', '#20B2AA'});}
+            d3.select('#button2003').style('background-color', '#DCDCDC');
+            d3.select('#button2015').style('background-color', '#20B2AA');}
         else if (current_data == 2015) {current_data = 2003; updateSvg(data_2003, true); 
-            d3.select('#button2015').style({'background-color', '#DCDCDC'});
-            d3.select('#button2003').style({'background-color', '#20B2AA'});}
+            d3.select('#button2015').style('background-color', '#DCDCDC');
+            d3.select('#button2003').style('background-color', '#20B2AA');}
 
         console.log(current_data);
     });
