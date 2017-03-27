@@ -6,16 +6,11 @@ d3.json('data_vis_1.json', data_vis_1 => {
     const w = 1000;
     const h = 600;
     const r_max = 30;
-    const padding = 90;
-
-    const text_label = d3.select("div#v1").append("div")
-                          .attr("class", "tooltip")
-                          .style("opacity", 0).style();
-
+    const padding = 50;
 
     let svg = d3.select('#v1').append("svg")
-			.attr("width", w)
-			.attr("height", h);
+						.attr("width", w)
+						.attr("height", h);
     
     let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
     let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
@@ -36,16 +31,13 @@ d3.json('data_vis_1.json', data_vis_1 => {
                    .range([0, r_max]);
 
 
-    let xAxis = d3.svg.axis()
+    let xAxis = d3.axisBottom()
                   .scale(xScale)
-                  .orient("bottom")
                   .ticks(10);
 
-    let yAxis = d3.svg.axis()
+    let yAxis = d3.axisLeft()
                   .scale(yScale)
-                  .orient("left")
                   .ticks(10);
-
                   
     const updateSvg = (data, transition) => {
         if (!transition) {
