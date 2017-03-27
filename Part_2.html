@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+    <title>Assignment 2B</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style type="text/css">
+        svg path {
+            fill: steelblue;
+        }
+
+        #controls button {
+                background-color: #0275d8;
+                border: none;
+                color: white;
+                padding: 10px 25px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer
+                }
+        #controls button:active {
+                background-color: #DCDCDC;
+        }
+
+        #controls button:focus {
+                background-color: #DCDCDC;
+        }
+    </style>
+    <body>
+        <section class='container'>
+            <h1>Assignment 2B: Visualizing geodata</h1>
+            <h3>Prostitution incidents clusters as calculated by K-means</h3>
+            <p>The following graph shows the distribution of the different crimes of prostitution across the districts of San Francisto. You can change the values of the cluster centers but clicking on the buttons.</p>
+
+            <h5>Used Data</h5>
+            <p>To make this visualization we used a JSON file generated with Python. You can see how it was done in Week 5 here:</p>
+            <a href="url">iPython Notebook</a>
+            <h5>Visualization: Prostitution incidents clusters as calculated by K-means</h5>
+             <div id='controls'>
+                <button class='btn btn-primary' data-val='2'>k = 2</button>
+                <button class='btn btn-primary' data-val='3'>k = 3</button>
+                <button class='btn btn-primary' data-val='4'>k = 4</button>
+                <button class='btn btn-primary' data-val='5'>k = 5</button>
+                <button class='btn btn-primary' data-val='6'>k = 6</button>
+            </div>
+            <div id='v_prost'></div>
+
+            <h5>Question: Why is the size of the file important?</h5>
+            <p>Since d3 is executed on the client side it is important to keep the data sizes relatively small. If the data is too big, since d3 needs to load it from the server and process all of it, big files might need an large amount of time to display. </p>
+           
+        </section>
+    </body>
+    <script src='d3.min.js'></script>
+    <script src='Part_2.js'></script>
+</html>

@@ -1,0 +1,127 @@
+var current_data = 2003;
+d3.json('data_vis_1.json', data_vis_1 => {
+    data_2003 = data_vis_1[2003];
+    data_2015 = data_vis_1[2015];
+
+    const w = 1000;
+    const h = 600;
+    const r_max = 30;
+    const padding = 50;
+
+    let svg = d3.select('#v1').append("svg")
+						.attr("width", w)
+						.attr("height", h);
+    
+    let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
+    let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
+    let xScale = d3.scaleLinear()
+                   .domain([0, Math.max(...new Set([...arr_x_1, ...arr_x_2]))])
+                   .range([padding, w - padding]);
+
+    let arr_y_1 = Object.values(data_2003).map(i => i['VEHICLE THEFT']);
+    let arr_y_2 = Object.values(data_2015).map(i => i['VEHICLE THEFT']);
+    let yScale = d3.scaleLinear()
+                   .domain([0, Math.max(...new Set([...arr_y_1, ...arr_y_2]))])
+                   .range([h - padding, padding]);
+
+    let arr_r_1 = Object.values(data_2003).map(i => i['total']);
+    let arr_r_2 = Object.values(data_2015).map(i => i['total']);
+    let rScale = d3.scaleLinear()
+                   .domain([0, Math.max(...new Set([...arr_r_1, ...arr_r_2]))])
+                   .range([0, r_max]);
+
+
+    let xAxis = d3.axisBottom()
+                  .scale(xScale)
+                  .ticks(10);
+
+    let yAxis = d3.axisLeft()
+                  .scale(yScale)
+                  .ticks(10);
+
+    const updateSvg = (data, transition) => {
+        if (!transition) {
+            svg.selectAll("circle").data(Object.values(data)).enter().append('circle').attr('opacity', '0.5')
+            .attr('r', p => rScale(p['total'])).attr('cx', p => xScale(p['PROSTITUTION'])).attr('cy', p => yScale(p['VEHICLE THEFT']));
+
+            svg.selectAll("text").data(Object.entries(data)).enter().append('text')
+            .text(p => p[0]).attr('x', p => xScale(p[1]['PROSTITUTION']) - 20).attr('y', p => yScale(p[1]['VEHICLE THEFT']) + 5)
+            .attr('font-family','Helvetica Neue, Roboto, sans-serif').attr('font-size','12px').attr('fill','red');   
+        } else {
+            svg.selectAll("circle").data(Object.values(data)).transition()
+            .attr('r', p => rScale(p['total'])).attr('cx', p => xScale(p['PROSTITUTION'])).attr('cy', p => yScale(p['VEHICLE THEFT']));
+
+            svg.selectAll("text").data(Object.entries(data)).transition()
+            .text(p => p[0]).attr('x', p => xScale(p[1]['PROSTITUTION']) - 20).attr('y', p => yScale(p[1]['VEHICLE THEFT']) + 5);   
+        }
+    }
+
+    updateSvg(data_2003);
+
+    svg.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(0," + (h - padding) + ")")
+       .call(xAxis);
+    svg.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(" + padding + ", 0)")
+       .call(yAxis);
+
+    svg.on('click', () => {
+        if (current_data == 2003) {current_data = 2015; updateSvg(data_2015, true);}
+        else if (current_data == 2015) {current_data = 2003; updateSvg(data_2003, true);}
+
+        console.log(current_data);
+    });
+});
+
+d3.json('data_vis_2.json', data_vis_2 => {
+    const w = 1000;
+    const h = 1000;
+    const padding_hor = 50;
+    const padding_top = 50;
+    const padding_bottom = 300;
+
+    let svg = d3.select('#v2').append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+    let xScale = d3.scaleBand()
+                   .domain(Object.keys(data_vis_2))
+                   .range([padding_hor, w - padding_hor]);
+    
+    let yScale = d3.scaleLinear()
+                   .domain([0, Math.max(...Object.values(data_vis_2))])
+                   .range([h - padding_bottom, padding_top]);
+
+
+    let xAxis = d3.axisBottom()
+                  .scale(xScale)
+                  .ticks(10);
+
+    let yAxis = d3.axisLeft()
+                  .scale(yScale)
+                  .ticks(10);
+
+    var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .offset([-10, 0])
+                .html(d => "<strong>Relative probability:</strong> <span style='color:red'>" + d[1] + "</span>");
+
+    svg.selectAll("rect").data(Object.entries(data_vis_2)).enter().append('rect').attr('width',xScale.bandwidth())
+    .attr('height', p => h - padding_bottom - yScale(p[1])).attr('x', p => xScale(p[0])).attr('y', p => yScale(p[1]))
+    .on('mouseover', tip.show)
+    .on('mouseout' , tip.hide);
+    
+
+    svg.append("g")
+       .attr("class", "axis axis-bottom")
+       .attr("transform", "translate(0," + (h - padding_bottom) + ")")
+       .call(xAxis);
+    svg.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(" + padding_hor + ", 0)")
+       .call(yAxis);
+
+    svg.call(tip);
+});

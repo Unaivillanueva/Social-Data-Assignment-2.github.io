@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+    <title>Assignment 2A</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style type="text/css">
+        svg rect:hover {
+            fill: deepskyblue;
+        }
+        svg rect {
+            fill: dodgerblue;
+        }
+        .d3-tip {
+            line-height: 1;
+            font-weight: bold;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 2px;
+        }
+
+        .d3-tip.n:after {
+            margin: -1px 0 0 0;
+            top: 100%;
+            left: 0;
+        }
+        .axis-bottom text {
+            transform: translateY(80px) rotate(-90deg)
+        }
+
+        .axis path,
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+            
+            .axis text {
+                font-family: Arial;
+                font-size: 15px;
+            }
+
+        #button2015{
+                background-color: #DCDCDC;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer
+               ;}
+        #button2003 {
+                background-color: #20B2AA;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer
+               ;}
+
+        /* tooltip for hovering over elements */
+        div.tooltip {
+            
+            text-align: center;
+            padding: 2px;
+            margin: 40px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+    </style>
+    <body>
+        <section class='container'>
+            <h1>Assignment 2A: One scatter plot and two datasets</h1>
+            <h3>Prostitution and Vehicle theft incidents per district</h3>
+            <p>In this first part of the assignment we will take a look at the incidences of prostitution and vehicle theft in the different districts of San Francisco in the years 2003 and 2015.</p>
+            <h5>Used Data</h5>
+            <p>To make this visualization we used a JSON file generated with Python. You can see the file here:</p>
+            <a href="https://jhoareau.github.io/socialdataanalysis-d3js/data_vis_1.json">JSON file</a>
+            
+
+            <h5>Visualization: Prositution/Vehicle theft in SF</h5>
+            <p>Click on the buttons to see the evolution of the crimes</p>
+            <button id="button2003">2003</button>
+            <button id="button2015">2015</button>
+            <div id='v1'></div>
+
+            <h5>Question: Why you think I want the axes to be the same for both years?</h5>
+            <p>If the axes changed with the data, it would be difficult to compare how the values evolved during the years. Since we maintain the same axes for both, it is really easy to notice how the cases of prostitution and vehicle theft have decreased from 2003 to 2015.</p>
+        </section>
+    </body>
+    <script src='d3.min.js'></script>
+    <script type='text/javascript' src='https://rawgit.com/Caged/d3-tip/master/index.js'></script>
+    <script src='Part_1.js'></script>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Assignment2.1</title>
+	<script type="text/javascript" src="d3.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		var w=500,h=300;
+		var padding=40;
+		/*var dataset=[[5,20],[480,90],[250,50],[100,33],[330,95],
+						[410,12],[475,44],[26,67],[85,21],[220,88],[600,150]];*/
+
+		var dataset1;  //Global variable
+		var dataset2;  //Global variable
+
+		var dataset1=d3.csv("Data2003.csv", function(error,data1) {
+			if (error) {  //If error is not null, something went wrong.
+	          console.log(error);  //Log the error.
+	        } else {      //If no error, the file loaded correctly. Yay
+
+
+		    dataset1 = data1;    //Once loaded, copy to dataset.
+
+		    //Convert to array
+		    var a=[];
+			var a2013=[];
+
+			dataset1.forEach(function(d){
+				a = [d.prostitution,d.vehicle_theft];
+				a2013.push(a);
+			});
+			
+			console.log(a2013);		//Then call other functions that
+		    				 		 //depend on data being present.
+
+
+		    //Add canvas
+
+		    var svg=d3.select("body").append("svg").attr("width",w).attr("height",h);
+
+				// Create scales
+			var xscale=d3.scale.linear()
+						.domain([0,d3.max(a2013,function(d){return d[0];})])
+						.range([padding,w-padding*3]);
+			var yscale=d3.scale.linear()
+						.domain([0,d3.max(a2013,function(d){return d[1];})])
+						.range([h-padding,padding]);
+			var rscale=d3.scale.linear()
+								.domain([d3.min(a2013,function(d){return (d[0]+d[1]);}),d3.max(a2013,function(d){return (d[0]+d[1]);})])
+								.range([2,5]);
+
+			// Define X axis
+			var xaxis=d3.svg.axis()
+							.scale(xscale)
+							.orient("bottom")
+							.ticks(5);
+
+			// Define Y axis
+			var yaxis=d3.svg.axis()
+							.scale(yscale)
+							.orient("left")
+							.ticks(5);
+
+			//Create circles
+
+			var circles=svg.append("g").attr("id","circles").attr("clip-path","url(#chart-area)").selectAll("circle").data(a2013).enter().append("circle");
+		
+			circles.attr(
+					{
+						cx:function(d){return xscale(d[0])},
+						cy:function(d){return yscale(d[1])},
+						r:function(d){return rscale(d[0]+d[1])},
+						"fill":"lightblue"
+					});
+
+		    	//Create X axis
+			svg.append("g")
+				.attr("class","x axis")
+				.attr("transform","translate(0,"+(h-padding)+")")
+				.call(xaxis);
+
+			//Create Y axis
+			svg.append("g")
+				.attr("class","y axis")
+				.attr("transform","translate("+padding+",0)")
+				.call(yaxis);
+
+			svg.append("clipPath")
+				.attr("id","chart-area")
+				.append("rect")
+				.attr(
+				{
+					"x":padding,
+					"y":padding , 
+					"width":w-padding*3,
+					"height":h-padding*2
+				});
+
+							}
+				});	
+
+
+		
+		var dataset2=d3.csv("Data2015.csv", function(error,data2) {
+			if (error) {  //If error is not null, something went wrong.
+	          console.log(error);  //Log the error.
+	        } else {      //If no error, the file loaded correctly. Yay!
+	          //console.log(data2);   //Log the data.
+
+		    dataset2 = data2;    //Once loaded, copy to dataset.
+		    
+
+		    var b=[];
+			var a2015=[];
+
+			dataset2.forEach(function(d){
+				b = [d.prostitution,d.vehicle_theft];
+				a2015.push(b);
+			});
+			
+			console.log(a2015);		//Then call other functions that
+		    				 		 //depend on data being present.
+
+
+			var svg=d3.select("body").append("svg").attr("width",w).attr("height",h);
+
+
+				// Create scales
+			var xscale=d3.scale.linear()
+						.domain([0,d3.max(a2015,function(d){return d[0];})])
+						.range([padding,w-padding*3]);
+			var yscale=d3.scale.linear()
+						.domain([0,d3.max(a2015,function(d){return d[1];})])
+						.range([h-padding,padding]);
+			var rscale=d3.scale.linear()
+								.domain([d3.min(a2015,function(d){return (d[0]+d[1]);}),d3.max(a2015,function(d){return (d[0]+d[1]);})])
+								.range([2,5]);
+
+			// Define X axis
+			var xaxis=d3.svg.axis()
+							.scale(xscale)
+							.orient("bottom")
+							.ticks(5);
+
+			// Define Y axis
+			var yaxis=d3.svg.axis()
+							.scale(yscale)
+							.orient("left")
+							.ticks(5);
+
+			//Create circles
+
+			var circles=svg.append("g").attr("id","circles").attr("clip-path","url(#chart-area)").selectAll("circle").data(a2015).enter().append("circle");
+		
+			circles.attr(
+					{
+						cx:function(d){return xscale(d[0])},
+						cy:function(d){return yscale(d[1])},
+						r:function(d){return rscale(d[0]+d[1])},
+						"fill":"lightblue"
+					});
+
+		    	//Create X axis
+			svg.append("g")
+				.attr("class","x axis")
+				.attr("transform","translate(0,"+(h-padding)+")")
+				.call(xaxis);
+
+			//Create Y axis
+			svg.append("g")
+				.attr("class","y axis")
+				.attr("transform","translate("+padding+",0)")
+				.call(yaxis);
+
+			svg.append("clipPath")
+				.attr("id","chart-area")
+				.append("rect")
+				.attr(
+				{
+					"x":padding,
+					"y":padding , 
+					"width":w-padding*3,
+					"height":h-padding*2
+				});
+
+			}
+			});	
+		
+		
+
+		
+	
+			
+	</script>
+
+</body>
+</html>
