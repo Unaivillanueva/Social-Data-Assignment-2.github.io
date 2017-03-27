@@ -7,15 +7,15 @@ d3.json('data_vis_1.json', data_vis_1 => {
     const h = 600;
     const r_max = 30;
     const padding = 90;
-
+	
+    const text_label = d3.select("div#v1").append("div")
+                          .attr("class", "tooltip")
+                          .style("opacity", 0);
 	
     let svg = d3.select('#v1').append("svg")
 			  .attr("width", w)
 			  .attr("height", h);
 	
-    const text_label = d3.select("div#v1").append("div")
-                          .attr("class", "tooltip")
-                          .style("opacity", 0);
 
     let arr_x_1 = Object.values(data_2003).map(i => i['PROSTITUTION']);
     let arr_x_2 = Object.values(data_2015).map(i => i['PROSTITUTION']);
