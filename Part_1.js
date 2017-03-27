@@ -36,14 +36,12 @@ d3.json('data_vis_1.json', data_vis_1 => {
                    .range([0, r_max]);
 
 
-    let xAxis = d3.svg.axis()
+    let xAxis = d3.axisBottom()
                   .scale(xScale)
-                  .orient("bottom")
                   .ticks(10);
 
-    let yAxis = d3.svg.axis()
+    let yAxis = d3.axisLeft()
                   .scale(yScale)
-                  .orient("left")
                   .ticks(10);
 
                   
